@@ -12,6 +12,6 @@ jobs:
     - name: configure_test
       run: ls
     - name: configure
-      run: gcc -o exec .C/HW/main.c
+      run: gcc -o exec C/HW/main.c
     - name: make test
       run: ./exec
