@@ -18,8 +18,8 @@ jobs:
     - name: configure
       run: gcc -o exec3 C/examples/example3.c  
     - name: make test1
-      run: ./C/examples/exec1
+      run: ./exec1
     - name: make test2
-      run: ./C/examples/exec2
+      run: ./exec2
     - name: make test3
-      run: ./C/examples/exec3
+      run: ./exec3
