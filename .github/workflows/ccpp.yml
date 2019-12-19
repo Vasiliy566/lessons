@@ -9,6 +9,8 @@ jobs:
     
     steps:
     - uses: actions/checkout@v1
+    - name: configure_test
+      run: ls
     - name: configure
       run: gcc -o exec .C/HW/main.c
     - name: make test
