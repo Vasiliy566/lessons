@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <math.h>
 
 
 
@@ -116,7 +116,7 @@ int super_check(int desk[3][3]){
 	return 0;
 }
 
-void smartPlay(int desk[3][3], int type ){
+void smartPlay(int desk[3][3], int type, int difficult ){
 	// найдем свободные клетки и запишем их координаты в массивы Х и У
 	
 	int n = 0;
@@ -135,31 +135,27 @@ void smartPlay(int desk[3][3], int type ){
 
 	int copyDesk[3][3];
 
-	int results[n];
-	for( int i = 0; i < n; i ++)
-	{
-		results[i] = 0;
-	}
+	int results[9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
 	
 
 	for( int i = 0; i < n; i ++)
 	{
 		int result = 0;
 		
-		for(int j = 0; j < 10; j ++){
+		for(int j = 0; j < difficult; j ++){
 			int moves = 9 - n + 1;
-			//sleep(1);
+			
 			
 			int type_copy = type;
-			// make copy of desk
+			
 			for(int z = 0; z < 3; z ++){
 				for(int k = 0; k < 3; k ++){
 					copyDesk[z][k] = desk[z][k];
 				}
 			}
 			copyDesk[ x[i] ][ y[i] ] = type_copy;
-
-			
+			type_copy *= -1;
+				
 			while(super_check(copyDesk) == 0){
 				if (moves >= 9){
 					break;
@@ -170,9 +166,10 @@ void smartPlay(int desk[3][3], int type ){
 			
 			}
 		
-			watchDesk(copyDesk);
-			result += -1 * super_check(copyDesk);
-			printf("%d %d\n", -1 * super_check(copyDesk), moves);
+			result +=  10 * type * super_check(copyDesk);
+			if (super_check(copyDesk) == 0)
+				result += 7;
+		
 
 		}
 		results[i] = result;
@@ -181,7 +178,7 @@ void smartPlay(int desk[3][3], int type ){
 	int max = 0;
 	for( int i = 0; i < n; i ++)
 	{
-		printf("move %d %d reting %d\n", x[i], y[i], results[i]);
+		//printf("move %d %d rating %d\n", x[i], y[i], results[i]);
 		if (results[i] > results[max])
 			max = i;
 	}
@@ -200,16 +197,43 @@ int main()
 	int type = 1;
 	int moves = 0;
 	int error = 0;
-	watchDesk(desk);
+	int difficult = 100;
+
+
+
+	printf ( "выберите уровень сложности \n 1   2   3\n" );
+	int h;
+	scanf ("%d", &h);
+	if ( h > 3 )
+	{
+		difficult = 10000;
+	} else  
+	if ( h < 1)
+	{
+		difficult = 100;
+
+	}
+	else 
+	{
+		difficult = 100 * pow(10, h	);
+
+	}
+	printf("difficult: %d, %d \n", difficult, h);
+	printf("vyberite storonu\n 1 - kerstiku; -1 - noliki\n");// выбираем уровень сложности
+	int user_type ;
+	scanf ("%d", &user_type);
+		watchDesk(desk);
 	while(super_check(desk) == 0){
-		if(type == 1){
-			 error = inputCoordinates(desk, type);
+		if(type == user_type){
+			error = inputCoordinates(desk, type);
+			//smartPlay(desk, type);
+			//randommuf(desk, type);
 			if(error == 0){
 				moves ++;
 			} 
 		} else {
 			if (error == 0){
-			smartPlay(desk, type);
+			smartPlay(desk, type, difficult);
 			//randommuf(desk, type);
 			moves ++;
 			}
@@ -218,7 +242,13 @@ int main()
 		watchDesk(desk);
 		
 		if (moves >= 9){
-			printf("ничья \n");
+			if (super_check(desk) == 1){
+				printf("крестики выиграли\n ");
+			}
+			else if (super_check(desk) == -1){
+				printf("нолики выиграли\n ");
+			} else{
+			printf("ничья \n");}
 			return 0;
 		}
 	}
@@ -227,6 +257,7 @@ int main()
 		printf("крестики выиграли\n ");
 	if (super_check(desk) == -1)
 		printf("нолики выиграли\n ");
+	
 }
 
 
