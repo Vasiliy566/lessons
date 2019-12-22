@@ -1,31 +1,44 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
 int main ()
 {
-	int n, k, i;
+	int n = 0;
 	scanf ("%d", &n);
-	int a = 0;
-	for (i=0; i < n; i++)
+	int i = 0;
+	 while( i < n - 1) 
 	{
-		scanf ("%d", &k);
-		if ( k != 0)
-		{
-			a = 1;
-		}
+	  i ++;
+	  if ( i%2==0 )
+	  {
+	 	printf ("I hate ");
+	  }
+	  else 
+	  {	
+	 	printf ("I love ");
+	  }
+	  printf(" it ");
 	}
-	if ( a == 0)
-	{
-		printf ("EASY");
-	}
-	else 
-	{
-		printf ("HARD");
 
-	}
-	return 0;
+i ++;
+	  if ( i%2==0 )
+	  {
+	 	printf ("I hate ");
+	  }
+	  else 
+	  {	
+	 	printf ("I love ");
+	  }
+	  printf(" that ");
+
+
 
 }
+
+
+
+
 
 
 
