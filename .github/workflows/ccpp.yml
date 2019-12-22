@@ -11,15 +11,25 @@ jobs:
     - uses: actions/checkout@v1
     - name: configure_test
       run: ls
-    - name: configure
+    - name: build example1
       run: gcc -o exec1 C/examples/example1.c
-    - name: configure
+    - name: build example2
       run: gcc -o exec2 C/examples/example2.c
-    - name: configure
+    - name: build example3
       run: gcc -o exec3 C/examples/example3.c  
-    - name: make test1
+    - name: test1
       run: ./exec1
-    - name: make test2
+    - name: test2
       run: ./exec2
-    - name: make test3
+    - name: test3
       run: ./exec3
+    - name: build HW2
+      run: gcc -o hw2.o C/examples/HW2.c
+    - name: test HW2
+      run: ./hw2.o <<< 1
+    - name: test HW2
+      run: ./hw2.o <<< 2
+    - name: test HW2
+      run: ./hw2.o <<< 3
+    - name: test HW2
+      run: ./hw2.o <<< 4
