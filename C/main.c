@@ -27,7 +27,7 @@ void randommuf(int desk[3][3], int type )
 
 	int r = (rand() % 10) % n; 
 
-	desk[ x[r] ][ y[r] ] = type;/
+	desk[ x[r] ][ y[r] ] = type;
 
 
 }
