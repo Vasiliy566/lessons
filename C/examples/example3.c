@@ -21,7 +21,7 @@ int main() {
 
 	// задаем границы - [start; end]
 	
-	printf("пример 1 \n");
+	printf("пример 2 - с границами \n");
 	
 	int start = 0;
 	int end = 10;
@@ -39,9 +39,11 @@ int main() {
 	}
 	**************************/
 	// простой пример с while
+	printf("пример 3 - цикл while \n");
 	int i = 0;
-	while(i < 5){
+	while(i < 10){
 		printf("%d ", i);
+		i++;
 	}
 
 	return 0;
