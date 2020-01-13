@@ -24,7 +24,7 @@ jobs:
     - name: test3
       run: ./exec3
     - name: build HW2
-      run: gcc -o hw2.o C/HW/hw2.c
+      run: gcc -o hw2.o C/HW/done.c
     - name: test HW2
       run: ./hw2.o <<< 1
     - name: test HW2
