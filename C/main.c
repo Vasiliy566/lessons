@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <time.h>
 
 
 
-void randommuf(int desk[3][3], int type )
+int Randommuf(int desk[3][3], int type )
 {
-	
+	if (desk == NULL ) 
+		return 1;
 	int n = 0;
 	int x[9];
 	int y[9];
@@ -24,13 +24,12 @@ void randommuf(int desk[3][3], int type )
 			}
 		}
 	}
-	
 
 	int r = (rand() % 10) % n; 
 
 	desk[ x[r] ][ y[r] ] = type;
 
-
+	return 0;
 }
 
 
@@ -192,10 +191,13 @@ void smartPlay(int desk[3][3], int type, int difficult )
 				{
 					break;
 				}
-				randommuf(copyDesk, type_copy);
-				moves ++;
-				type_copy *= -1;
-			
+				if(randommuf(copyDesk, type_copy) == 1){
+					printf("Error, something went wrong with array\n");
+					break;
+				} else {
+					moves ++;
+					type_copy *= -1;
+				}	
 			}
 		
 			result +=  10 * type * super_check(copyDesk);
@@ -235,7 +237,7 @@ int main()
 
 
 
-	printf ( "выберите уровень сложности \n 1   2   3\n" );
+	printf ( "choose difficulty level\n 1   2   3\n" );
 	int h;
 	scanf ("%d", &h);
 	if ( h > 3 )
@@ -250,7 +252,6 @@ int main()
 	else 
 	{
 		difficult = 100 * pow(10, h	);
-
 	}
 	printf("difficult: %d, %d \n", difficult, h);
 	printf("vyberite storonu\n 1 - kerstiku; -1 - noliki\n");
@@ -281,22 +282,22 @@ int main()
 		{
 			if (super_check(desk) == 1)
 			{
-				printf("крестики выиграли\n ");
+				printf("krestiki win\n ");
 			}
 			else if (super_check(desk) == -1)
 			{
-				printf("нолики выиграли\n ");
+				printf("noliki win\n ");
 			} else{
-			printf("ничья \n");
+			    printf("draw \n");
 		}
 			return 0;
 		}
 	}
 
 	if (super_check(desk) == 1)
-		printf("крестики выиграли\n ");
+		printf("krestiki win\n ");
 	if (super_check(desk) == -1)
-		printf("нолики выиграли\n ");
+		printf("noliki win\n ");
 	
 }
 
