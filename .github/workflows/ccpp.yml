@@ -23,13 +23,7 @@ jobs:
       run: ./exec2
     - name: test3
       run: ./exec3
-    - name: build HW2
-      run: gcc -o hw2.o C/HW/done/hw2.c
+    - name: build kurs
+      run: gcc -o kurs.o C/kurseWork/main.c
     - name: test HW2
-      run: ./hw2.o <<< 1
-    - name: test HW2
-      run: ./hw2.o <<< 2
-    - name: test HW2
-      run: ./hw2.o <<< 3
-    - name: test HW2
-      run: ./hw2.o <<< 4
+      run: ./C/kurseWork/kurs.o
