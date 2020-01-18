@@ -24,6 +24,6 @@ jobs:
     - name: test3
       run: ./exec3
     - name: build kurs
-      run: gcc -o kurs.o -lm C/kurseWork/main.c  
+      run: gcc -o kurs.o C/kurseWork/main.c -lm 
     - name: test HW2
       run: ./C/kurseWork/kurs.o
