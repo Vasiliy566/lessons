@@ -26,4 +26,4 @@ jobs:
     - name: build kurs
       run: gcc -o kurs.o C/kurseWork/main.c -lm 
     - name: test HW2
-      run: ./C/kurseWork/kurs.o
+      run: ./kurs.o
