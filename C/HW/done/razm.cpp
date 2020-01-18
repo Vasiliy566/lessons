@@ -2,52 +2,37 @@
 
 int main()
 {
-int n = 0;
-scanf("%d", &n);
-int a = 0;
-int b = 0;
+	int n = 0;
+	scanf ("%d", &n);
+	char str[n];
+	scanf ("%s", str);
 
-a = n / 100;
-b = n % 100;
-if (b == 0)
-{
-	printf ("%d \n", a);
+	int a = 0;
+	int b = 0;
+	for (int i = 0; i <= n; i++)
+	{
+		if (str[i] == 'S' and str[i+1] == 'F')
+		{
+			a++;
+		}
+		if (str[i] == 'F' and str[i+1] == 'S')
+		{
+			b++;
+		}
+	}
+	if (a > b)
+	{
+		printf ("YES");
+	}
+	else 
+	{
+		printf ("NO");
+	}
 	return 0;
-}
-a += b / 20;
-b = b % 20;
-if (b == 0)
-{
-	printf ("%d \n", a);
-	return 0;
-}
-a += b / 10;
-b = b % 10;
-if (b == 0)
-{
-	printf ("%d \n", a);
-	return 0;
-}
-a += b / 5;
-b = b % 5;
-if (b == 0)
-{
-	printf ("%d \n", a);
-	return 0;
-}
-a += b / 1;
-b = b % 1;
-if (b == 0)
-{
-	printf ("%d \n", a);
-	return 0;
-}
-return 0;
-
-
-
 
 }
+
+
 
 
 
