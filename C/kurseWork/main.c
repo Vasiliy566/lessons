@@ -66,29 +66,45 @@ int inputCoordinates(int desk[3][3], int type)
 
 int watchDesk(int desk[3][3])
 {
+  int err = 0;
   if (desk == NULL ) 
     return 1;
-  printf("------------------\n");
+  
+  err = printf("------------------\n");
+  if ( err < 0)
+    return 2;
+  
   for (int i=0; i<3; i++)
   {
     for (int j=0; j<3; j++)
     {
       if (desk[i][j] == 1)
       {
-        printf("X ");
+        err = printf("X ");
+        if ( err < 0)
+          return 3;
       } else 
       if (desk[i][j] == -1)
       {
-        printf("O ");
+        err = printf("O ");
+        if ( err < 0)
+          return 4;
       }
       else 
       {
-        printf("- ");
+        err = printf("- ");
+        if (err < 0)
+          return 5;
       }
     }
-    printf("\n");
+    err = printf("\n");
+    if ( err < 0)
+      return 6;
   }
-    printf("------------------\n");
+  err = printf("------------------\n");
+  if ( err < 0)
+    return 7;
+  return 0;
 }
 
 
@@ -234,7 +250,7 @@ int smartPlay(int desk[3][3], int type, int difficult )
       max = i;
   }
   desk[ x[max] ][ y[max] ] = type;
-
+  return 0;
 }
 
 int test(){
@@ -264,15 +280,12 @@ int test(){
    
 }
 
-
-
 int main()
 {
   int mode = 1;
-  if (mode == 1){
+  if (mode == 1)
   printf("test status: %x \n", test());
-  return 0;
-}
+  
   srand(time(0));
   int desk[3][3];
   for (int i=0; i<3; i++)
@@ -289,7 +302,10 @@ int main()
 
 
 
-  printf ( "choose difficulty level\n 1   2   3\n" );
+  int err = printf ( "choose difficulty level\n 1   2   3\n" );
+  if ( err < 0)
+    return 1;
+
   int h;
   scanf ("%d", &h);
   if ( h > 3 )
@@ -305,10 +321,18 @@ int main()
   {
     difficult = 100 * pow(10, h );
   }
-  printf("difficult: %d, %d \n", difficult, h);
-  printf("vyberite storonu\n 1 - kerstiku; -1 - noliki\n");
+  err = printf("difficult: %d, %d \n", difficult, h);
+  if ( err < 0)
+    return 1;
+  err = printf("vyberite storonu\n 1 - kerstiku; -1 - noliki\n");
+  if ( err < 0)
+      return 1;
+
+
   int user_type ;
-  scanf ("%d", &user_type);
+  err = scanf ("%d", &user_type);
+  if( err != 1)
+    return 1;
     watchDesk(desk);
   while(super_check(desk) == 0){
     if(type == user_type)
@@ -334,21 +358,33 @@ int main()
     {
       if (super_check(desk) == 1)
       {
-        printf("krestiki win\n ");
+        err = printf("krestiki win\n ");
+        if ( err < 0)
+          return 1;
       }
       else if (super_check(desk) == -1)
       {
-        printf("noliki win\n ");
+        err = printf("noliki win\n ");
+        if ( err < 0)
+          return 1;
       } else{
-          printf("draw \n");
+        err = printf("draw \n");
+        if ( err < 0)
+        return 1;
     }
       return 0;
     }
   }
 
-  if (super_check(desk) == 1)
-    printf("krestiki win\n ");
-  if (super_check(desk) == -1)
-    printf("noliki win\n ");
+  if (super_check(desk) == 1){
+    err = printf("krestiki win\n ");
+    if ( err < 0)
+          return 1;
+  }
+  if (super_check(desk) == -1){
+    err = printf("noliki win\n ");
+    if ( err < 0)
+          return 1;
+  }
 
 }
