@@ -283,9 +283,10 @@ int test(){
 int main()
 {
   int mode = 1;
-  if (mode == 1)
+  if (mode == 1){
   printf("test status: %x \n", test());
-  
+  return 0;
+  }
   srand(time(0));
   int desk[3][3];
   for (int i=0; i<3; i++)
