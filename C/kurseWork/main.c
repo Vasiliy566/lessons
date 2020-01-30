@@ -287,7 +287,7 @@ int main()
   printf("test status: %x \n", test());
   return 0;
   }
-  srand(time(0));
+  srand(time(NULL));
   int desk[3][3];
   for (int i=0; i<3; i++)
   {
