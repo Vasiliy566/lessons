@@ -108,7 +108,7 @@ int watchDesk(int desk[3][3])
 }
 
 
-int cheek_1(int desk[3][3])
+int cheek_1(int desk[3][3], int* out)
 {
   if (desk == NULL ) 
     return 1;
@@ -117,12 +117,14 @@ int cheek_1(int desk[3][3])
   {
     if( (desk[0][i] == desk[1][i]) && (desk[0][i] == desk[2][i]))
     {
-      return desk[0][i];
+      *out = desk[0][i];
+      return 0;
     }
   }
+  *out = 0;
   return 0;
 }
-int cheek_2(int desk[3][3])
+int cheek_2(int desk[3][3], int* out)
 {
   if (desk == NULL ) 
     return 1;
@@ -130,41 +132,61 @@ int cheek_2(int desk[3][3])
   {
     if( (desk[i][0] == desk[i][1]) && (desk[i][0] == desk[i][2]))
     {
-      return desk[i][0];
+      *out = desk[i][0];
+      return 0;
     }
   }
+  *out = 0;
   return 0;
 }
 
-int cheek_3(int desk[3][3])
+int cheek_3(int desk[3][3], int* out)
 {
   if (desk == NULL ) 
     return 1;
 
   if( (desk[0][0] == desk[1][1]) && (desk[0][0] == desk[2][2]))
   {
-    return desk[0][0];
+    *out = desk[0][0];
+    return 0;
   }
   if( (desk[0][2] == desk[1][1]) && (desk[0][2] == desk[2][0]))
   {
-    return desk[2][0];
+    *out = desk[2][0];
+    return 0;
   }
+  *out = 0;
   return 0;
 }
 
 
-int super_check(int desk[3][3])
+int super_check(int desk[3][3], int* out)
 {
   if (desk == NULL ) 
     return 1;
-  if (cheek_1(desk) != 0)
-    return cheek_1(desk);
+  int res = -20;
 
-  if (cheek_2(desk) != 0)
-    return cheek_2(desk);
+  if(cheek_1(desk, &res) != 0)
+      return 2;
+  if (res != 0) {
+      *out = res;
+      return 0;
+  }
 
-  if (cheek_3(desk) != 0)
-    return cheek_3(desk);
+  if(cheek_2(desk, &res) != 0)
+      return 3;
+  if (res != 0) {
+      *out = res;
+      return 0;
+    }
+
+  if(cheek_3(desk, &res) != 0)
+      return 4;
+  if (res != 0) {
+      *out = res;
+      return 0;
+    }
+  *out = 0;
   return 0;
 }
 
@@ -217,8 +239,9 @@ int smartPlay(int desk[3][3], int type, int difficult )
       }
       copyDesk[ x[i] ][ y[i] ] = type_copy;
       type_copy *= -1;
-
-      while(super_check(copyDesk) == 0)
+      int res = 0;
+      res = super_check(copyDesk, &res);
+      while(res == 0)
       {
         if (moves >= 9)
         {
@@ -230,11 +253,14 @@ int smartPlay(int desk[3][3], int type, int difficult )
         } else {
           moves ++;
           type_copy *= -1;
-        } 
+        }
+          res = super_check(copyDesk, &res);
       }
+      res = super_check(copyDesk, &res);
+      result +=  10 * type * res;
 
-      result +=  10 * type * super_check(copyDesk);
-      if (super_check(copyDesk) == 0)
+      res = super_check(copyDesk, &res);
+      if (res == 0)
         result += 7;
 
 
@@ -256,25 +282,58 @@ int smartPlay(int desk[3][3], int type, int difficult )
 int test(){
 
   int status = 0;
-  int desk[3][3] =  { {0, 0, 0}, {0, 0, 0}, {0, 0, 0} };
-  int desk1[3][3] = { {-1,-1,-1}, {0,0,0}, {0, 0, 0} };
-  int desk2[3][3] = { {1,0,0}, {0,1,0}, {0,0,1} };
+  int desk[3][3] =  { {0, 0, 0},
+                      {0, 0, 0},
+                      {0, 0, 0} };
+  int desk1[3][3] = { {-1,-1,-1},
+                      {0,0,0},
+                      {0, 0, 0} };
+  int desk2[3][3] = { {-1,1,1},
+                      {1,-1,0},
+                      {0,0,-1} };
+  watchDesk(desk2);
   //assert(status(RandomMove(desk) != 0);
   // check not-winning position
-  assert(cheek_1(desk) == 0);
-  assert(cheek_2(desk) == 0);
-  assert(cheek_3(desk) == 0);
-  assert(super_check(desk) == 0);
+  int res = -1000;
+
+  assert(cheek_1(desk, &res) == 0);
+  assert(res == 0);
+
+  assert(cheek_2(desk, &res) == 0);
+  assert(res == 0);
+
+  assert(cheek_3(desk, &res) == 0);
+  assert(res == 0);
+
+  assert(super_check(desk, &res) == 0);
+  assert(res == 0);
   //check common wining of O(-1)
-  assert(cheek_1(desk1) == 0);
-  assert(cheek_2(desk1) == -1);
-  assert(cheek_3(desk1) == 0);
-  assert(super_check(desk1) == -1);
+  assert(cheek_1(desk1, &res) == 0);
+  assert(res == 0);
+
+  assert(cheek_2(desk1, &res) == 0);
+  assert(res == -1);
+
+  assert(cheek_3(desk1, &res) == 0);
+  assert(res == 0);
+
+  assert(super_check(desk1, &res) == 0);
+  assert(res == -1);
+
+  //assert(super_check(desk1) == -1);
   // check diagonal win of X(1)
-  assert(cheek_1(desk2) == 0);
-  assert(cheek_2(desk2) == 0);
-  assert(cheek_3(desk2) == 1);
-  assert(super_check(desk2) == 1);
+  assert(cheek_1(desk2, &res) == 0);
+  assert(res == 0);
+  assert(cheek_2(desk2, &res) == 0);
+  assert(res == 0);
+  assert(cheek_3(desk2, &res) == 0);
+  assert(res == -1);
+  assert(super_check(desk2, &res) == 0);
+  assert(res == -1);
+  //assert(cheek_1(desk2) == 0);
+  //assert(cheek_2(desk2) == 0);
+  //assert(cheek_3(desk2) == 1);
+  //assert(super_check(desk2) == 1);
 
   return status;
    
@@ -283,11 +342,11 @@ int test(){
 int main()
 {
   int mode = 1;
-  if (mode == 1){
+  int res = 0;
+  if (mode == 1)
   printf("test status: %x \n", test());
-  return 0;
-  }
-  srand(time(NULL));
+  
+  srand(time(0));
   int desk[3][3];
   for (int i=0; i<3; i++)
   {
@@ -335,7 +394,8 @@ int main()
   if( err != 1)
     return 1;
     watchDesk(desk);
-  while(super_check(desk) == 0){
+  
+  while(res == 0){
     if(type == user_type)
     {
       error = inputCoordinates(desk, type);
@@ -357,13 +417,14 @@ int main()
 
     if (moves >= 9)
     {
-      if (super_check(desk) == 1)
+      
+      if (res == 1)
       {
         err = printf("krestiki win\n ");
         if ( err < 0)
           return 1;
       }
-      else if (super_check(desk) == -1)
+      else if (res == -1)
       {
         err = printf("noliki win\n ");
         if ( err < 0)
@@ -375,17 +436,22 @@ int main()
     }
       return 0;
     }
+    assert(super_check(desk, &res) == 0);
+  
   }
 
-  if (super_check(desk) == 1){
+  assert(super_check(desk, &res) == 0);
+  if (res == 1){
     err = printf("krestiki win\n ");
     if ( err < 0)
           return 1;
   }
-  if (super_check(desk) == -1){
+
+  if (res == -1){
     err = printf("noliki win\n ");
     if ( err < 0)
           return 1;
   }
 
+return 0;
 }
