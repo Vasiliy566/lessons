@@ -3,7 +3,13 @@
 #include <math.h>
 #include <assert.h>
 
-
+/*
+* Функция случайного хода
+* Фукнция совершает один случайный ход на поле desk[3][3] за type
+* @param int desk in/out текущее состояние игровой доски
+* @param int type in {1, -1} сторона, которая должна сделать ход
+* @return тип ошибки или 0, если функция выполнена без ошибок
+*/
 int RandomMove(int desk[3][3], int type )
 {
   if (desk == NULL ) 
@@ -32,7 +38,12 @@ int RandomMove(int desk[3][3], int type )
   return 0;
 }
 
-
+/*
+* Функция считывает данные введеные пользователем и делает ход в ту позицию, в которую указал пользователь
+* @param int desk in/out текущее состояние игровой доски
+* @param int type in {1, -1} сторона, которая должна сделать ход 
+* @return тип ошибки или 0, если функция выполнена без ошибок
+*/
 int inputCoordinates(int desk[3][3], int type)
 {
   if (desk == NULL ) 
@@ -63,7 +74,11 @@ int inputCoordinates(int desk[3][3], int type)
 }
 
 
-
+/*
+* Функция принимает на вход игровое поле desk [3][3] и выводит ее на экран
+* @param int desk in/out текущее состояние игровой доски
+* @return тип ошибки или 0, если функция выполнена без ошибок
+*/
 int watchDesk(int desk[3][3])
 {
   int err = 0;
@@ -107,7 +122,11 @@ int watchDesk(int desk[3][3])
   return 0;
 }
 
-
+/*
+* Функция проверяет свободные клетки по горизонтали
+* @param int desk in/out текущее состояние игровой доски
+* @return тип ошибки или 0, если функция выполнена без ошибок
+*/
 int cheek_1(int desk[3][3], int* out)
 {
   if (desk == NULL ) 
@@ -124,6 +143,11 @@ int cheek_1(int desk[3][3], int* out)
   *out = 0;
   return 0;
 }
+/*
+* Функция проверяет свободные клетки по вертикали
+* @param int desk in/out текущее состояние игровой доски
+* @return тип ошибки или 0, если функция выполнена без ошибок
+*/
 int cheek_2(int desk[3][3], int* out)
 {
   if (desk == NULL ) 
@@ -139,7 +163,11 @@ int cheek_2(int desk[3][3], int* out)
   *out = 0;
   return 0;
 }
-
+/*
+* Функция проверяет свободные клетки по диагонали
+* @param int desk in/out текущее состояние игровой доски
+* @return тип ошибки или 0, если функция выполнена без ошибок
+*/
 int cheek_3(int desk[3][3], int* out)
 {
   if (desk == NULL ) 
@@ -159,7 +187,11 @@ int cheek_3(int desk[3][3], int* out)
   return 0;
 }
 
-
+/*
+* Функция проверяет значение всех выполненых cheek 
+* @param int desk in/out текущее состояние игровой доски
+* @return тип ошибки или 0, если функция выаолнена без ошибок
+*/
 int super_check(int desk[3][3], int* out)
 {
   if (desk == NULL ) 
@@ -189,7 +221,13 @@ int super_check(int desk[3][3], int* out)
   *out = 0;
   return 0;
 }
-
+/*
+* Функция запускает симуляцию случайных партий и записывает процент выйгрышных партий 
+* @param int desk in/out текущее состояние игровой доски
+* @param int type in {1, -1} сторона, которая должна сделать ход
+* @param int difficult количество партий, которое будет просчитано
+* @return тип ошибки или 0, если функция выполнена без ошибок
+*/
 int smartPlay(int desk[3][3], int type, int difficult )
 {
   if (desk == NULL ) 
@@ -278,7 +316,11 @@ int smartPlay(int desk[3][3], int type, int difficult )
   desk[ x[max] ][ y[max] ] = type;
   return 0;
 }
-
+/*
+* Функция запускает проверку всех выполненых cheek  
+* @param int desk in/out текущее состояние игровой доски
+* @return status, если функция выполнена без ошибок
+*/
 int test(){
 
   int status = 0;
@@ -338,7 +380,10 @@ int test(){
   return status;
    
 }
-
+/*
+* Функция обрабатывает 
+* @return тип ошибки или 0, если функция выполнена без ошибок
+*/
 int main()
 {
   int mode = 1;
