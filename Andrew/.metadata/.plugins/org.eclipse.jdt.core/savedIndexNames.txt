@@ -1,3 +1,0 @@
-INDEX VERSION 1.131+/Users/vasiliyisaev/eclipse-workspace/.metadata/.plugins/org.eclipse.jdt.core
-1340757803.index
-2232399637.index
