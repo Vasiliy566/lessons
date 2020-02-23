@@ -9,21 +9,15 @@ jobs:
     
     steps:
     - uses: actions/checkout@v1
-    - name: configure_test
-      run: ls
     - name: build example1
-      run: gcc -o exec1 C/examples/example1.c
+      run: gcc -o exec1 Pavel/examples/ex1.c
     - name: build example2
-      run: gcc -o exec2 C/examples/example2.c
+      run: gcc -o exec1 Pavel/examples/ex2.c
     - name: build example3
-      run: gcc -o exec3 C/examples/example3.c  
-    - name: test1
-      run: ./exec1
-    - name: test2
-      run: ./exec2
-    - name: test3
-      run: ./exec3
-    - name: build kurs
-      run: gcc -o kurs.o C/kurseWork/main.c -lm 
-    - name: test HW2
-      run: ./kurs.o
+      run: gcc -o exec1 Pavel/examples/ex3.c
+    - name: build example4
+      run: gcc -o exec1 Pavel/examples/ex4.c
+    - name: build example5
+      run: gcc -o exec1 Pavel/examples/ex5.c
+    - name: build example6
+      run: gcc -o exec1 Pavel/examples/ex6.c
