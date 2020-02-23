@@ -7,3 +7,51 @@
  При заданном целом числе n посчитайте n + nn + nnn
  Напишите программу, которая принимает два массива и выводит все элементы первого, которых нет во второ
 ```
+## Примеры функции print
+```
+a = 5
+arr = [1,2,3,4]
+arr_s = ["a", "b", "c", 5]
+```
+```
+print ("Hello, Python!")
+```
+Hello, Python!
+```
+print(a)
+```
+5
+```
+print(arr)
+```
+[1, 2, 3, 4]
+```
+print(arr_s)
+```
+['a', 'b', 'c', 5]
+```
+print( a, arr, arr_s)
+```
+5 [1, 2, 3, 4] ['a', 'b', 'c', 5]
+## Циклы
+```
+Java:   for(int i = 0; i < N; i ++)
+Python: for i in range(0, N, 1)
+```
+Обработка массива
+```
+пусть есть массив arr 
+Java: 
+for(int i = 0; i < arr.length(); i ++){
+ some action in loop
+ }
+ action out of loop
+Python:
+for i in arr:
+    some action in loop
+ action out of loop
+  
+```
+
+
+
