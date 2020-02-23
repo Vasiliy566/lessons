@@ -121,6 +121,38 @@ int main()
 
 }
 ```
+Функция считывания строки произвольного размера
+```
+#define CHUNK 200
+
+struct myString{
+int size;
+char* data;
+};
+typedef struct myString Struct;
+
+Struct readinput()
+{
+
+char* input = NULL;
+char tempbuf[CHUNK];
+size_t inputlen = 0, templen = 0;
+do {
+fgets(tempbuf, CHUNK, stdin);
+templen = strlen(tempbuf);
+input = realloc(input, inputlen+templen);
+strcpy(input+inputlen, tempbuf);
+inputlen += templen;
+} while (templen==CHUNK-1 && tempbuf[CHUNK-2]!='\n');
+
+Struct out;
+input[inputlen - 1] = 0;
+out.size = inputlen - 1;
+out.data = input;
+
+return out;
+}
+```
 ## Terminal
 Основные команды
 
