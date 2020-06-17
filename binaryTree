@@ -1,0 +1,70 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct element {
+	int data;
+	struct element * right;
+	struct element * left;
+} node_t;
+
+void addElement(node_t * root, int data){
+	
+	if (data > root->data){
+		if (root->right == NULL){
+			node_t * newElement = NULL;
+		    newElement = malloc(sizeof(node_t));
+		    newElement->right = NULL;
+		    newElement->left = NULL;
+		    newElement->data = data;
+		    root->right = newElement;
+		}
+		else {
+			addElement(root->right, data);
+		}
+	}
+	if (data <= root->data){
+		if (root->left == NULL){
+			node_t * newElement = NULL;
+		    newElement = malloc(sizeof(node_t));
+		    newElement->right = NULL;
+		    newElement->left = NULL;
+		    newElement->data = data;
+		    root->left = newElement;
+		}
+		else {
+			addElement(root->left, data);
+		}
+	}
+}
+
+void showAll(node_t * root){
+	if ( root -> right != NULL){
+		showAll(root -> right);
+	}
+	
+	printf("%d, ", root->data);
+	
+	if ( root -> left != NULL){
+		showAll(root -> left);
+	}
+
+}
+
+int main (){
+	node_t * head = NULL;
+    head = malloc(sizeof(node_t));
+    head->data = 0;
+    head->right = NULL;
+	head->left = NULL;
+	addElement(head, 12);
+    addElement(head, -2);
+    addElement(head, 5);
+    addElement(head, 22);
+    addElement(head, -4);
+    addElement(head, 7);
+    addElement(head, 100);
+    
+    showAll(head);
+    printf("\n****************\n");
+
+}
