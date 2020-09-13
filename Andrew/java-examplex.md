@@ -1,18 +1,18 @@
 # Шпаргалка по java
 ### Чтение из файла
-Читаем файл в переменную file
+Читаем файл в FileReader в переменную fr
 ```
-File file = new File("./text.txt");
+FileReader fr= new FileReader("file1.txt");
 ```
-Создаем буффер для чтения из файла
+Создаем сканнер с входным потоком из файла
 ```
-BufferedReader reader = new BufferedReader(new FileReader(file));
+Scanner scan = new Scanner(fr);
 ```
 Читаем строку из файла
 ```
-String line1 = reader.readLine();
+String line1 = scan.nextLine()
 ```
 Закрываем буффер ( не обязательно, но желательно)
 ```
-br.close();
+scan.close()
 ```
