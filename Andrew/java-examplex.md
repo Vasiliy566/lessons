@@ -16,3 +16,9 @@ String line1 = scan.nextLine()
 ```
 scan.close()
 ```
+### Перевод из одного типа данных в другой 
+Перевод String в Integer
+```
+String line = "123";
+int a = Integer.parseInt(line);
+```
