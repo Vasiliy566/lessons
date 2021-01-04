@@ -1,0 +1,18 @@
+import java.util.Scanner;
+
+//Составить программу печати всех делителей натурального числа A. Пользователь вводит А
+public class rep2 {
+public static void main(String[] args) {
+Scanner in = new Scanner(System.in);
+long A = in.nextInt();
+long B = in.nextInt();
+long sum;
+for (long i=A;i<=B;i++) {
+sum=0;
+for (long j=1;j<i;j++){
+if (i%j==0) sum+=j;
+}
+if (sum==i) System.out.println(i);
+}
+}
+}
