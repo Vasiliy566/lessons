@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-//Составить программу печати всех делителей натурального числа A. Пользователь вводит А
+//Составить программу поиска совершенных чисел
 public class rep2 {
 public static void main(String[] args) {
 Scanner in = new Scanner(System.in);
