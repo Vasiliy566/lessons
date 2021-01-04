@@ -1,0 +1,22 @@
+import java.util.Scanner;
+
+//Все ли элементы массива различны
+public class rep5 {
+public static void main(String[] args) {
+Scanner in = new Scanner(System.in);
+int n = in.nextInt();
+boolean f = true;
+int arr[] = new int[n];
+for (int i = 0; i < n; i++) {
+arr[i] = in.nextInt();
+}
+for (int i = n-1; i >= 1; i--) {
+if (arr[i] != arr[i - 1]) {
+f = !f;
+break;
+}
+}
+if (f) System.out.println("YES");
+else System.out.println("NO");
+}
+}
