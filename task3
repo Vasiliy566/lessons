@@ -1,0 +1,12 @@
+import java.util.Scanner;
+
+//Составить программу печати всех делителей натурального числа A. Пользователь вводит А
+public class rep3 {
+public static void main(String[] args) {
+Scanner in = new Scanner(System.in);
+int A = in.nextInt();
+for (int i = 1; i <= A; i++) {
+if (A % i == 0) System.out.println(i);
+}
+}
+}
